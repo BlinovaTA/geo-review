@@ -1,0 +1,93 @@
+@import 'normalize.css';
+
+body,
+html {
+  height: 100%;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+
+  li {
+    list-style: none;
+  }
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+}
+
+.modal {
+  flex: 1;
+  display: none;
+  margin: 5px 0px 5px 5px;
+
+  &__list {
+    border-bottom: 1px #ccc solid;
+    max-height: 70px;
+    overflow: auto;
+
+    &--clusterer {
+      border: none
+    }
+  }
+
+  &__list-item {
+    margin-bottom: 4px;
+  }
+
+  &__title {
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  &__address {
+    width: 308px;
+    font-weight: bold;
+    border-bottom: 1px #ccc solid;
+  }
+
+  &__text {
+    color: #8F8F8F;
+  }
+}
+
+.form {
+  margin-bottom: 10px;
+
+  &__input {
+    display: block;
+    width: 286px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+
+    &--textarea {
+      resize: none;
+      height: 76px;
+      margin-bottom: 19px;
+    }
+  }
+
+  &__button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    background: #FF8663;
+    cursor: pointer;
+  }
+}
+
+.input-error {
+  border-color: red;
+}
+
+.balloon {
+  width: 308px;
+  display: flex;
+  flex-direction: column;
+}

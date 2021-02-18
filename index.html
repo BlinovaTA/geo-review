@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=23265c40-7e83-4018-b79c-affa080745c1&lang=ru_RU"
+    type="text/javascript"> </script>
+  <title>Geo-review</title>
+</head>
+
+<body>
+  <div id="map" class="map"></div>
+
+  <div class="modal" style="display:none">
+    <div class="modal__body">
+      <div class="modal__title">Отзыв:</div>
+      <div class="form">
+        <input class="form__input" type="text" name="name" id="name" placeholder="Укажите ваше имя">
+        <input class="form__input" type="text" name="place" id="place" placeholder="Укажите место">
+        <textarea class="form__input form__input--textarea" name="comment" id="comment"
+          placeholder="Оставить отзыв"></textarea>
+        <button class="form__button">Добавить</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
