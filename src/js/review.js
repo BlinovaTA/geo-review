@@ -16,7 +16,7 @@ export default class Review {
       if (filteredData.length === 0) {
         this.map.createPlacemark(item);
       } else {
-        filteredData[0].properties.set({ filteredData: this.filterByCoords(this.getData(), item.coords) });
+        filteredData[0].properties.set({ filteredData: this.filterByCoords(dataFromStorage, item.coords) });
       }
     });
 
@@ -183,9 +183,11 @@ export default class Review {
   }
 
   getData() {
-    if (localStorage.getItem('markers')) {
-      return JSON.parse(localStorage.getItem('markers'));
+    if (!localStorage.getItem('markers')) {
+      this.createStorage();
     }
+    
+    return JSON.parse(localStorage.getItem('markers'));
   }
 
   setData(newData) {
@@ -196,6 +198,10 @@ export default class Review {
 
     markers.push(newData);
     localStorage.setItem('markers', JSON.stringify(markers));
+  }
+
+  createStorage() {
+    localStorage.setItem('markers', '[]');
   }
 
   validateFields(fieldsArray) {
