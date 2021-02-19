@@ -56,6 +56,10 @@ export default class Map {
     this.map.balloon.close();
   }
 
+  balloonIsOpen(){
+    return this.map.balloon.isOpen();
+  }
+
   setBalloonContent(content) {
     this.map.balloon.setData(content);
   }

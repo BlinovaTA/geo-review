@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import Map from './map';
 
 export default class Review {
@@ -7,7 +7,7 @@ export default class Review {
     this.map.init().then(this.onInit.bind(this));
   }
 
-  async onInit() {
+  onInit() {
     const dataFromStorage = this.getData();
 
     dataFromStorage.forEach(item => {
@@ -21,6 +21,7 @@ export default class Review {
     });
 
     document.addEventListener('click', this.onFormClick.bind(this));
+    document.addEventListener('keydown', this.onFormKeydown.bind(this));
   }
 
   onClick(coords, isClustered) {
@@ -41,12 +42,18 @@ export default class Review {
     this.map.setClusteredBalloonContent(template);
   }
 
+  onFormKeydown(e) {
+    if (e.keyCode == 27 && this.map.balloonIsOpen()) {
+      this.map.closeBalloon();
+    }
+  }
+
   onFormClick(e) {
     let { className } = e.target;
 
     if (className === 'form__button') {
       this.submitClick();
-    } else if (className === 'modal__address--link') {
+    } else if (className === 'js-address-link') {
       this.linkClick(e);
     }
   }
@@ -59,7 +66,7 @@ export default class Review {
     const place = this.getSelector('#place');
     const comment = this.getSelector('#comment');
     const address = await this.getAddress(coords);
-    const date = moment().format('L');
+    const date = dayjs().format('DD.MM.YYYY');
 
     if (!this.validateFields([name, place, comment])) {
       return;
@@ -144,7 +151,7 @@ export default class Review {
 
     let address = document.createElement('a');
     address.href = '#';
-    address.className = 'modal__address--link';
+    address.className = 'js-address-link';
     address.textContent = '{{properties.address}}';
     address.dataset.coords = '[{{properties.coords}}]';
 
@@ -186,12 +193,13 @@ export default class Review {
     if (!localStorage.getItem('markers')) {
       this.createStorage();
     }
-    
+
     return JSON.parse(localStorage.getItem('markers'));
   }
 
   setData(newData) {
     let markers = [];
+
     if (localStorage.getItem('markers')) {
       markers = JSON.parse(localStorage.getItem('markers'));
     }
@@ -210,13 +218,17 @@ export default class Review {
     fieldsArray.forEach(field => {
       field.classList.remove('input-error');
 
-      if (field.value.trim() === '') {
+      if (!this.isValid(field)) {
         field.classList.add('input-error');
         isValid = false;
       }
     });
 
     return isValid;
+  }
+
+  isValid(field) {
+    return field.value.trim() !== '';
   }
 
   getSelector(id) {

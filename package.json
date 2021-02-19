@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/BlinovaTA/geo-review#readme",
   "dependencies": {
-    "moment": "^2.29.1",
+    "dayjs": "^1.10.4",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {
