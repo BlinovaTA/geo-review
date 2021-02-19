@@ -21,7 +21,6 @@ ul {
 
 .modal {
   flex: 1;
-  display: none;
   margin: 5px 0px 5px 5px;
 
   &__list {
@@ -68,7 +67,7 @@ ul {
     &--textarea {
       resize: none;
       height: 76px;
-      margin-bottom: 19px;
+      margin-bottom: 15px;
     }
   }
 
